@@ -1,0 +1,105 @@
+<html>
+
+<body>
+	{% include 'errand/header.html' %}
+
+	<div class="container">
+		<div class="alert alert-info" style="display:none;" id="nojobs">
+			<center>No new jobs!</center>
+		</div>
+		<ul class="collection jobs">
+		<!--
+		{% for j in jobs %}
+		    <li class="collection-item avatar">
+		      <span class="title">{{j.service.name}}</span>
+		      <p>{{j.by}}<br>
+		         {{j.by.location}}
+		      </p>
+		      <a href="#!" class="secondary-content"><i class="material-icons">hourglass empty</i></a>
+		    </li>
+	    {% endfor %}
+	    -->
+
+	    </ul>
+	</div>
+</body>
+
+<script type="text/javascript">
+	totalJobs = 0;
+	function appendJobs() {
+		//$('.jobs').empty();
+		newjobs = 0;
+		$.ajax({
+			type: "GET",
+	        url: "/getjobs",
+	       	success: function(data)
+	       	{	
+	       		if(totalJobs==0 && data.length==0){
+	       			$("#pending-jobs").html('Jobs');
+					$("#nojobs").css('display','block');
+	       		}
+	        	for(var i =0;i<data.length;i++) {
+	        		flag = true;
+	        		$('.collection-item').each(function(){
+	        			if($(this).attr("id") == data[i]['pk'])
+	        				flag = false;
+	        		});
+	        		if(flag){
+	        			newjobs++;
+	        			var str = '<li class="collection-item avatar" id="'+data[i]['pk']+'">'+
+	        					'<span class="title">'+data[i]['fields']['service']+'</span>'+
+	        						'<p>'+data[i]['fields']['by']+'<br>'+data[i]['fields']['location']+'</p>'+
+	        							'<a class="secondary-content btn-floating btn-large waves-effect waves-light green right"><i class="material-icons" id="'+data[i]['pk']+'">done</i></a>'+
+	        					'</li>';
+		        		$('.jobs').append(str);
+		        		totalJobs += newjobs;
+						if(totalJobs != 0){
+							$("#pending-jobs").html('Jobs('+totalJobs+')');
+							$("#nojobs").css('display','none');
+						}
+						else{
+							$("#pending-jobs").html('Jobs');
+							$("#nojobs").css('display','block');
+						}
+					}
+	        	}
+	        }
+		});
+	}
+	appendJobs();
+	setInterval(appendJobs, 5000);
+	$(document).on('click', '.material-icons', function(){
+		jobid = $(this).attr('id');
+		$.ajax({
+	          type: 'POST',
+	          url: "/grantservice/",
+	          data: {'jobid':jobid},
+	          success: function(data) {
+	            if(data['res'] == 'true'){
+	            	$(".avatar").each(function(){
+	            		if($(this).attr('id') == jobid)
+	            			parent_div = this;
+	            	})
+	            	parent_div.remove();
+	            	Materialize.toast('Job Granted', 3000);
+	            	totalJobs--;
+	            	if(totalJobs != 0){
+						$("#pending-jobs").html('Jobs('+totalJobs+')');
+						$("#nojobs").css('display','none');
+					}
+
+					else{
+						$("#pending-jobs").html('Jobs');
+						$("#nojobs").css('display','block');
+					}
+	            }
+	            else {
+	            	Materialize.toast('Error', 3000);	
+	            }
+	        }
+	    });
+	})
+
+</script>
+
+</html>

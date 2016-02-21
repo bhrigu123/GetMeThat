@@ -1,0 +1,84 @@
+<html>
+
+<body>
+	{% include 'errand/header.html' %}
+	<div class="container">
+		<div class="alert alert-info" style="display:none;" id="nopending">
+			<center>No pending service requests!</center>
+		</div>
+		{% for p in pending %}
+		<ul class="collection" id="{{p.id}}">
+		    <li class="collection-item avatar">
+		      <span class="title">{{p.service.name}}</span>
+		      <a class="btn-floating btn-large waves-effect waves-light green right {% if not p.granted %}disabled{% endif %}" id="{{p.id}}"><i class="material-icons">done</i></a>
+		      <p>Assigned to: {{p.assigned}}<br>
+		         {{p.time|time}}
+		      </p>
+		    </li>
+		  </ul>
+	    {% endfor %}
+	</div>
+</body>
+<script type="text/javascript">
+	$("#pend").addClass('active');
+	pending = 0;
+	$(".material-icons").each(function(){
+		pending++;
+	});
+	$("#pending").html('Pending Requests('+pending+')');
+	function checkGranted(){
+		$.ajax({
+			type : "GET",
+			url : "/getservices",
+			success : function(data){
+				if(data.length == 0){
+					$("#pending").html('Pending Requests');
+					$("#nopending").css('display','block');
+				}
+				else{
+					for(var i =0;i<data.length;i++) {
+						if(data[i]['fields']['granted']){
+							$('.btn-floating').each(function(){
+								if($(this).attr('id') == data[i]['pk'])
+									$(this).removeClass('disabled');
+							});
+						}
+					}
+				}
+			}
+		})
+	}
+	setInterval(checkGranted, 5000);
+	$('.btn-floating').click(function(){
+		jobid = $(this).attr('id');
+		$.ajax({
+	          type: 'POST',
+	          url: "/acceptjob/",
+	          data: {'jobid':jobid},
+	          success: function(data) {
+	            if(data['res'] == 'true'){
+	            	$(".collection").each(function(){
+	            		if($(this).attr('id') == jobid)
+	            			parent_div = $(this);
+	            	});
+	            	parent_div.remove();
+	            	Materialize.toast('Service Accepted', 3000);
+	            	pending--;
+	            	if(pending != 0){
+						$("#pending").html('Pending Requests('+pending+')');
+						$("#nopending").css('display','none');
+					}
+
+					else{
+						$("#pending").html('Pending Requests');
+						$("#nopending").css('display','block');
+					}
+	            }
+	            else {
+	            	Materialize.toast('Error', 3000);	
+	            }
+	        }
+	    });
+	});
+</script>
+</html>

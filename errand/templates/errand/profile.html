@@ -1,0 +1,36 @@
+<html>
+
+<body>
+	{% include 'errand/header.html' %}
+	<div class="container">
+			
+			<div class="col-xs-12">
+				<h3>Profile</h3>
+				<div class="admin-box" style="padding:10px; margin: 10px">
+					<h5>Email: <span style="color: gray">ashish@gmail.com</span></h5>
+					<h5>Name: <span style="color: gray">Ashish </span></h5>
+					<h5>Role: <span style="color: gray">Employee </span> </h5>
+				</div>
+				<div class="admin-box" style="padding:50px; margin: 10px">
+					<h5>Change Password: </h5>
+					 <form method="post" action="" role="form">
+					 	  <div class="form-group">
+						    <label for="cu_pwd">Current password:</label>
+						    <input name="cu_pwd" type="password" class="form-control" id="cu_pwd">
+						  </div> 
+						  <div class="form-group">
+						    <label for="pwd">New password:</label>
+						    <input name="pwd" type="password" class="form-control" id="pwd">
+						  </div>
+						  <div class="form-group">
+						    <label for="cpwd">Confirm password:</label>
+						    <input name="cpwd" type="password" class="form-control" id="cpwd">
+						  </div>
+						  <button type="submit" class="btn btn-default pull-right">Change</button>
+					</form>
+				</div>
+			</div>
+	</div>
+</body>
+
+</html>

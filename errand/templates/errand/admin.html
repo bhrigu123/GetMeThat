@@ -1,0 +1,109 @@
+<html>
+
+<body>
+	{% include 'errand/header.html' %}
+	<div class="row">
+		<div class="col-xs-12 col-lg-6">
+				<div class="admin-box">
+					<center><h4>Services</h4></center>
+					<h5>Add a new service: </h5>
+					 <form method="post" action="" role="form">
+					 	{% csrf_token %}
+						<input type="hidden" name="type" value="service">
+						  <div class="form-group">
+						    <label for="name">Service Name:</label>
+						    <input name="name" type="text" class="form-control" id="name">
+						  </div>
+						  <div class="form-group">
+						    <label for="cost">Cost:</label>
+						    <input name="cost" type="text" class="form-control" id="cost">
+						  </div>
+						  <button type="submit" class="btn btn-default pull-right">Add</button>
+					</form>
+
+					<br><br>
+					 <center><h5>Already Existing services</h5></center>        
+					  <table class="table table-striped">
+					    <thead>
+					      <tr>
+					      	<th class="col-xs-1"><center>#</center></th>
+					        <th class="col-xs-4"><center>Name</center></th>
+					        <th class="col-xs-2"><center>Cost</center></th>
+					        <th class="col-xs-2"><center>Frequency</center></th>
+					        <th class="col-xs-3"><center>Actions</center></th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					    	{% for s in services %}
+					      	<tr>
+						      	<td><center>{{forloop.counter}}</center></td>
+						        <td><center>{{s.name}}</center></td>
+						        <td><center>{{s.cost}}</center></td>
+						        <td><center>15</center></td>
+						        <td><center><a href = "/"><i class="material-icons">delete</i></a>
+						        <a href = "/"><i class="material-icons">settings</i></a>
+						        </center></td>
+						    </tr>
+						    {% endfor %}
+					    </tbody>
+					  </table>
+				</div>				
+			</div>
+			<div class="col-xs-12 col-lg-6">
+				<div class="admin-box">
+					<center><h4>Users</h4></center>
+					<h5>Add a new user: </h5>
+					<form method="post" action="" role="form">
+						{% csrf_token %}
+						<input type="hidden" name="type" value="user">
+						  <div class="form-group">
+						    <label for="email">Email:</label>
+						    <input name="email" type="email" class="form-control" id="email">
+						  </div>
+						  <div class="form-group">
+						    <label for="name">Name:</label>
+						    <input name="name" type="text" class="form-control" id="name">
+						  </div>
+						  <div class="form-group">
+						    <label for="role">Role: </label>
+						    <select name="role" class="form-control" id="role">
+							    <option>Employee</option>
+							    <option>Errand Boy</option>
+							</select>
+						    </div>
+						  <button type="submit" class="btn btn-default pull-rght">Add</button>
+					</form>
+
+					<br><br>
+					 <center><h5>Existing Users:</h5></center>        
+					  <table class="table table-striped">
+					    <thead>
+					      <tr>
+					      	<th class="col-xs-1"><center>#</center></th>
+					        <th class="col-xs-5"><center>Name</center></th>
+					        <th class="col-xs-4"><center>Role</center></th>
+					        <th class="col-xs-2"><center>Actions</center></th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					    	{% for u in users %}
+					      	<tr>
+						    	<td><center>{{forloop.counter}}</center></td>
+					        	<td><center>{{u.username}}</center></td>
+					        	<td><center>{{u.myuser.role.role}}</center></td>
+					        	<td><center><a href = "/"><i class="material-icons">delete</i></center></td>
+					      	</tr>
+					      	{% endfor %}
+					    </tbody>
+				  </table>
+			</div>
+		</div>
+	</div>
+    
+</body>
+<script type="text/javascript">
+	{% if added %}
+		Materialize.toast('{{added}}', 4000);
+	{% endif %}
+</script>
+</html>
