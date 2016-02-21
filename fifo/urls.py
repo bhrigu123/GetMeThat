@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^services/$',services),
     url(r'pending/$', pending),
     url(r'^jobs$', jobs),
+    url(r'profile/$', profile),
     url(r'administrator', administrator),
     url(r'log_out', log_out),
     url(r'getjobs', jobapi),
