@@ -3,7 +3,7 @@
 <html >
   <head>
     <meta charset="UTF-8">
-    <title>Sign In</title>
+    <title>GetMeThat</title>
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     
     <link rel="stylesheet" href="{% static 'errand/css/normalize.css' %}">
@@ -21,7 +21,14 @@
       <script src="{% static 'errand/js/bootstrap.min.js' %}"></script>  
       <script src="{% static 'errand/js/materialize.js' %}"></script>
       -->
-    
+    <style type="text/css">
+      table{
+        color: #fff;
+      }
+      thead{
+        border-bottom: 1px solid white;
+      }
+    </style>
     
     
   </head>
@@ -32,7 +39,7 @@
       
       <div class="tab-content">
         <div id="signup">   
-          <h1>Sign In</h1>
+          <h1>GetMeThat</h1>
           
           <form action="" method="post">
           {% csrf_token %}
@@ -51,19 +58,19 @@
 
         </div>
 
-        <h4>Note For the testers:</h4>
-        <p>For complete guide, refer to the following link:
+        <h4 style="color:#fff">Note for the testers:</h4>
+        <p style="color:#fff">For complete guide, refer to the following link:
         <a href = "https://github.com/bhrigu123/GetMeThat">https://github.com/bhrigu123/GetMeThat</a>
         </p>
-        <h4>Use the following for login for the different roles:</h4>
+        <h4 style="color:#fff">Use the following for login for the different roles:</h4>
         <table style = "width: 100%">
-                <tr>
+                <thead>
                   <th><center>#</center></th>
                   <th><center>Role</center></th>
                   <th><center>Username</center></th>
                   <th><center>Password</center></th>
 
-                </tr>
+                </thead>
                 <tr>
                     <td><center>1</center></td>
                     <td><center>Admin</center></td>
