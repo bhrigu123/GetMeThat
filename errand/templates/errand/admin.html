@@ -29,8 +29,6 @@
 					      	<th class="col-xs-1"><center>#</center></th>
 					        <th class="col-xs-4"><center>Name</center></th>
 					        <th class="col-xs-2"><center>Cost</center></th>
-					        <th class="col-xs-2"><center>Frequency</center></th>
-					        <th class="col-xs-3"><center>Actions</center></th>
 					      </tr>
 					    </thead>
 					    <tbody>
@@ -39,10 +37,6 @@
 						      	<td><center>{{forloop.counter}}</center></td>
 						        <td><center>{{s.name}}</center></td>
 						        <td><center>{{s.cost}}</center></td>
-						        <td><center>15</center></td>
-						        <td><center><a href = "/"><i class="material-icons">delete</i></a>
-						        <a href = "/"><i class="material-icons">settings</i></a>
-						        </center></td>
 						    </tr>
 						    {% endfor %}
 					    </tbody>
@@ -82,7 +76,6 @@
 					      	<th class="col-xs-1"><center>#</center></th>
 					        <th class="col-xs-5"><center>Name</center></th>
 					        <th class="col-xs-4"><center>Role</center></th>
-					        <th class="col-xs-2"><center>Actions</center></th>
 					      </tr>
 					    </thead>
 					    <tbody>
@@ -91,7 +84,6 @@
 						    	<td><center>{{forloop.counter}}</center></td>
 					        	<td><center>{{u.username}}</center></td>
 					        	<td><center>{{u.myuser.role.role}}</center></td>
-					        	<td><center><a href = "/"><i class="material-icons">delete</i></center></td>
 					      	</tr>
 					      	{% endfor %}
 					    </tbody>
