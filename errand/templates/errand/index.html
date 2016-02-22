@@ -1,15 +1,26 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html >
   <head>
     <meta charset="UTF-8">
     <title>Sign In</title>
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     
-    <link rel="stylesheet" href="../../static/errand/css/normalize.css">
-
+    <link rel="stylesheet" href="{% static 'errand/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'errand/css/style.css' %}">
     
-        <link rel="stylesheet" href="../../static/errand/css/style.css">
-
+    
+      <!--
+      
+      <link rel="stylesheet" href="{% static 'errand/css/materialize.css' %}">
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="{% static 'errand/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'errand/css/custom.css' %}">
+       
+      <script src="{% static 'errand/js/jquery-2.0.0.min.js' %}"></script>
+      <script src="{% static 'errand/js/bootstrap.min.js' %}"></script>  
+      <script src="{% static 'errand/js/materialize.js' %}"></script>
+      -->
     
     
     
@@ -77,5 +88,10 @@
     
     
     
-  </body>
+</body>
+<script type="text/javascript">
+  {% if msg %}
+    Materialize.toast("{{msg}}", 4000);
+  {% endif %}
+</script>
 </html>

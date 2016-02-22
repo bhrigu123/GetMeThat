@@ -5,15 +5,15 @@
 	<div class="container">
 			
 			<div class="col-xs-12">
-				<h3>Profile</h3>
+				<center><h3>{{user.first_name}} {{user.last_name}}</h3></center>
 				<div class="admin-box" style="padding:10px; margin: 10px">
-					<h5>Email: <span style="color: gray">ashish@gmail.com</span></h5>
-					<h5>Name: <span style="color: gray">Ashish </span></h5>
-					<h5>Role: <span style="color: gray">Employee </span> </h5>
+					<h6><span style="color: gray">{{user.myuser.role.role}}</span> </h6>
+					<h6>Email: <span style="color: gray">{{user.email}}</span></h6>
 				</div>
 				<div class="admin-box" style="padding:50px; margin: 10px">
 					<h5>Change Password: </h5>
 					 <form method="post" action="" role="form">
+					 	{% csrf_token %}
 					 	  <div class="form-group">
 						    <label for="cu_pwd">Current password:</label>
 						    <input name="cu_pwd" type="password" class="form-control" id="cu_pwd">
@@ -32,5 +32,9 @@
 			</div>
 	</div>
 </body>
-
+<script type="text/javascript">
+	{% if msg %}
+		Materialize.toast("{{msg}}", 4000);
+	{% endif %}
+</script>
 </html>

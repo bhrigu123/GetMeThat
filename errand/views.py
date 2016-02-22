@@ -29,7 +29,7 @@ def home(request):
 		    login(request, user)
 		    return redirect('/')
 		else:
-			return HttpResponse("Invalid Credentials")
+			return render(request, 'errand/index.html', {'msg':"Invalid Credentials"})
 
 def services(request):
 	if(not request.user.is_authenticated()):
@@ -208,7 +208,7 @@ def profile(request):
 	if(request.method=="GET"):
 		if(not request.user.is_authenticated()):
 			return redirect('/')		
-		return render(request, 'errand/profile.html')
+		return render(request, 'errand/profile.html', {})
 	elif(request.method=="POST"):
 		username = request.user.username
 		currentPassword = request.POST.get('cu_pwd')
@@ -225,11 +225,12 @@ def profile(request):
 		    	print user
 		    	user.set_password(password)
 		    	user.save()
-		    	return redirect('/profile/')
+		    	return render(request, 'errand/profile.html', {'msg':'Password Changed'})
 		    else:
 		    	print "new passwords dont match"
-		    	return redirect('/profile/', {'Error':'True'})		
+		    	return render(request, 'errand/profile.html', {'msg':'Passwords do not matched'})
 		else:
 			print "current password dont match"
-			return redirect('/profile/', {'Error':'True'})		
+		    	return render(request, 'errand/profile.html', {'msg':'Invalid Current Password'})
+					
 
