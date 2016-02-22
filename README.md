@@ -12,6 +12,8 @@ There is also an admin account, who can add/remove services and accounts of empl
 
 * After a job is granted by the errand boy, the employee can now 'check' and accept that job. Thus a job process is complete.
 
+* The assigining, granting and accepting of jobs change in real time.
+
 #### Sample accounts to test the site:
 | Role  | Username  | Password  |
 |---|---|---|
