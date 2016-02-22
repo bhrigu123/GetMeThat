@@ -21,3 +21,5 @@ There is also an admin account, who can add/remove services and accounts of empl
 | Employee  | ashish  | ashish  |
 | Errand Boy | anshuman  | anshuman  |
 | Errand Boy | puneet | puneet |
+
+(You can visit /admin to tweak around the entries in the database for testing purposes)
