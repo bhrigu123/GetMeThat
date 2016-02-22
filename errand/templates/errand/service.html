@@ -3,11 +3,6 @@
 <body>
 	{% include 'errand/header.html' %}
 	<div class="container">
-	<div class="progress">
-	  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%; padding-top:4px;">
-	    3/5 services completed
-	  </div>
-	</div>
 		{% for s in services %}
 		<div class="col-xs-12 col-sm-6 col-md-6 col-md-4">
 			<div class="card" id="{{s.id}}">
