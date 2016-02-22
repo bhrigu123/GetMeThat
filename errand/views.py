@@ -212,25 +212,18 @@ def profile(request):
 	elif(request.method=="POST"):
 		username = request.user.username
 		currentPassword = request.POST.get('cu_pwd')
-		print currentPassword
 		user = authenticate(username = username, password = currentPassword)
 		if user is not None:
 		    password = request.POST.get('pwd')
-		    print password
 		    confirmPassword = request.POST.get('cpwd')
-		    print confirmPassword
 		    if(password == confirmPassword):
-		    	print "in if"
 		    	user = request.user
-		    	print user
 		    	user.set_password(password)
 		    	user.save()
 		    	return render(request, 'errand/profile.html', {'msg':'Password Changed'})
 		    else:
-		    	print "new passwords dont match"
-		    	return render(request, 'errand/profile.html', {'msg':'Passwords do not matched'})
+		    	return render(request, 'errand/profile.html', {'msg':'New Passwords do not match'})
 		else:
-			print "current password dont match"
-		    	return render(request, 'errand/profile.html', {'msg':'Invalid Current Password'})
+		    return render(request, 'errand/profile.html', {'msg':'Invalid Current Password'})
 					
 
